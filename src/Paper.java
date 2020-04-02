@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.net.*;
 import java.util.HashSet;
-import java.util.Iterator;
 
 
 class Paper extends JPanel {
@@ -13,7 +12,6 @@ class Paper extends JPanel {
     private int myAdress;
     private Paper thisPaper = this;
     private String host;
-    private Receiver receiver = new Receiver();
 
 
     private HashSet<Point> hs = new HashSet<>();
@@ -50,6 +48,7 @@ class Paper extends JPanel {
         this.sendAdress = sendAdress;
         this.host = host;
         System.out.println(sendAdress);
+        Receiver receiver = new Receiver();
         receiver.start();
     }
 
