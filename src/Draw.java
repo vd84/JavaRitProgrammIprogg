@@ -2,9 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Draw extends JFrame {
-    int sendSocket;
-    String host;
-    int mySocket;
 
 
     private Paper p;
@@ -26,9 +23,6 @@ public class Draw extends JFrame {
         getContentPane().add(p, BorderLayout.CENTER);
         setSize(640, 480);
         setVisible(true);
-        this.mySocket = mySocket;
-        this.host = host;
-        this.sendSocket = sendSocket;
     }
 }
 

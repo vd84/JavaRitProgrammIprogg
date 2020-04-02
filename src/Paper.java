@@ -9,14 +9,11 @@ import java.util.Iterator;
 
 
 class Paper extends JPanel {
-    byte buf[] = null;
-    InetAddress ip;
-    DatagramSocket socket;
-    int sendAdress;
-    int myAdress;
-    Paper thisPaper = this;
-    String host;
-    Receiver receiver = new Receiver();
+    private int sendAdress;
+    private int myAdress;
+    private Paper thisPaper = this;
+    private String host;
+    private Receiver receiver = new Receiver();
 
 
     private HashSet<Point> hs = new HashSet<>();
@@ -45,7 +42,7 @@ class Paper extends JPanel {
         }
     }
 
-    public Paper(int myAdress, String host, int sendAdress) {
+    Paper(int myAdress, String host, int sendAdress) {
         setBackground(Color.white);
         addMouseListener(new L1());
         addMouseMotionListener(new L2());
@@ -53,27 +50,20 @@ class Paper extends JPanel {
         this.sendAdress = sendAdress;
         this.host = host;
         System.out.println(sendAdress);
-        try {
-            ip = InetAddress.getByName(host);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
         receiver.start();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.black);
-        Iterator<Point> i = hs.iterator();
 
 
-        while (i.hasNext()) {
-            Point p = i.next();
+        for (Point p : hs) {
             g.fillOval(p.x, p.y, 2, 2);
         }
     }
 
-    public void send(String msg) {
+    private void send(String msg) {
         try {
             byte[] bytes = msg.getBytes();
             InetAddress adress = InetAddress.getByName(host);
@@ -88,7 +78,7 @@ class Paper extends JPanel {
     private void addPoint(Point p) {
         hs.add(p);
         repaint();
-        String message = Integer.toString(p.x) + " " + Integer.toString(p.y);
+        String message = p.x + " " + p.y;
         send(message);
     }
 
